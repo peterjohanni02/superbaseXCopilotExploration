@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supabase Data Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Supabase Data Dashboard</h1>
+            <p class="subtitle">Professional Data Viewer</p>
+        </header>
+
+        <div class="controls">
+            <div class="table-selector">
+                <label for="tableSelect">Select Table:</label>
+                <select id="tableSelect">
+                    <option value="">Loading tables...</option>
+                </select>
+            </div>
+            <button id="refreshBtn" class="btn btn-primary">
+                <span class="refresh-icon">🔄</span> Refresh Data
+            </button>
+        </div>
+
+        <div id="loadingState" class="loading-state">
+            <div class="spinner"></div>
+            <p>Loading data...</p>
+        </div>
+
+        <div id="errorState" class="error-state" style="display: none;">
+            <div class="error-icon">⚠️</div>
+            <p class="error-message"></p>
+        </div>
+
+        <div id="dataContainer" class="data-container">
+            <div class="table-info">
+                <span id="recordCount" class="record-count"></span>
+            </div>
+            <div class="table-wrapper">
+                <table id="dataTable">
+                    <thead id="tableHead"></thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <footer>
+            <p>Connected to Supabase • <span id="connectionStatus">●</span></p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
