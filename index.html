@@ -52,6 +52,21 @@
         </footer>
     </div>
 
+    <!-- Transaction Detail Modal -->
+    <div id="transactionModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeTransactionDetail()">&times;</span>
+            <div id="modalTransactionDetails"></div>
+            <h3>Transaction Items</h3>
+            <div class="table-wrapper">
+                <table>
+                    <thead id="modalItemsTableHead"></thead>
+                    <tbody id="modalItemsTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
     <script src="app.js"></script>
 
 </body>
