@@ -107,7 +107,7 @@ async function init() {
 async function loadAvailableTables() {
     try {
         // Try to find tables by attempting to query them
-        const commonTableNames = ['exampletable1', 'users', 'profiles', 'posts', 'products', 'items', 'data', 'records', 'employees', 'customers', 'orders'];
+        const commonTableNames = ['exampletable1', 'users', 'profiles', 'posts', 'products', 'items', 'data', 'records', 'employees', 'customers', 'orders', 'transactions'];
         const foundTables = [];
         
         for (const tableName of commonTableNames) {

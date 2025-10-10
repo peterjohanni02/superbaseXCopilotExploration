@@ -20,6 +20,13 @@ const demoData = {
         { id: 1003, customer_id: 3, product_id: 5, quantity: 1, total: '$399.99', status: 'shipped', order_date: '2024-02-03 14:15:00' },
         { id: 1004, customer_id: 1, product_id: 3, quantity: 3, total: '$149.97', status: 'processing', order_date: '2024-02-04 09:45:00' },
         { id: 1005, customer_id: 4, product_id: 4, quantity: 1, total: '$149.99', status: 'pending', order_date: '2024-02-05 16:20:00' }
+    ],
+    transactions: [
+        { id: 2001, order_id: 1001, payment_method: 'credit_card', amount: '$1,299.99', status: 'completed', transaction_date: '2024-02-01 10:05:00' },
+        { id: 2002, order_id: 1002, payment_method: 'paypal', amount: '$59.98', status: 'completed', transaction_date: '2024-02-02 11:35:00' },
+        { id: 2003, order_id: 1003, payment_method: 'debit_card', amount: '$399.99', status: 'completed', transaction_date: '2024-02-03 14:20:00' },
+        { id: 2004, order_id: 1004, payment_method: 'credit_card', amount: '$149.97', status: 'pending', transaction_date: '2024-02-04 09:50:00' },
+        { id: 2005, order_id: 1005, payment_method: 'bank_transfer', amount: '$149.99', status: 'pending', transaction_date: '2024-02-05 16:25:00' }
     ]
 };
 
