@@ -126,27 +126,25 @@ async function loadAvailableTables() {
             }
         }
         
-        if (foundTables.length > 0) {
-            availableTables = foundTables;
-        } else {
-            // Default to trying a generic table name
-            availableTables = ['data'];
-        }
+        availableTables = foundTables;
         
         // Populate the select dropdown
-        tableSelect.innerHTML = '';
-        availableTables.forEach(table => {
-            const option = document.createElement('option');
-            option.value = table;
-            option.textContent = table.charAt(0).toUpperCase() + table.slice(1);
-            tableSelect.appendChild(option);
-        });
+        if (availableTables.length > 0) {
+            tableSelect.innerHTML = '';
+            availableTables.forEach(table => {
+                const option = document.createElement('option');
+                option.value = table;
+                option.textContent = table.charAt(0).toUpperCase() + table.slice(1);
+                tableSelect.appendChild(option);
+            });
+        } else {
+            tableSelect.innerHTML = '<option value="">No tables found</option>';
+        }
         
     } catch (error) {
         console.error('Error loading tables:', error);
-        // Set a default table
-        availableTables = ['data'];
-        tableSelect.innerHTML = '<option value="data">Data</option>';
+        availableTables = [];
+        tableSelect.innerHTML = '<option value="">No tables found</option>';
     }
 }
 
