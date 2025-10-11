@@ -2,6 +2,42 @@
 const SUPABASE_URL = 'https://tslcgufxsbglncyxfxie.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRzbGNndWZ4c2JnbG5jeXhmeGllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAwOTM0MjcsImV4cCI6MjA3NTY2OTQyN30.7an0OkjV-Uz--IyDiIWd8KxK04FcKjjBtGINh2piZk0';
 
+// Demo data fallback (used when Supabase connection fails)
+const demoTransactions = [
+    { transactionID: 1, transDate: '2024-02-01', custName: 'John Smith', orderTotal: 1500.00, TotalPrice: 0 },
+    { transactionID: 2, transDate: '2024-02-02', custName: 'Jane Doe', orderTotal: 2200.50, TotalPrice: 0 },
+    { transactionID: 3, transDate: '2024-02-03', custName: 'Bob Wilson', orderTotal: 875.25, TotalPrice: 0 },
+    { transactionID: 4, transDate: '2024-02-04', custName: 'Alice Johnson', orderTotal: 3100.00, TotalPrice: 0 },
+    { transactionID: 5, transDate: '2024-02-05', custName: 'Charlie Brown', orderTotal: 650.75, TotalPrice: 0 }
+];
+
+const demoTransactionItems = [
+    // Transaction 1 items
+    { itemID: 1, Transaction: 1, itemName: 'Steel Pipe', length: 10.5, price: 25.00 },
+    { itemID: 2, Transaction: 1, itemName: 'Copper Wire', length: 50.0, price: 12.50 },
+    { itemID: 3, Transaction: 1, itemName: 'PVC Tube', length: 15.0, price: 8.75 },
+    
+    // Transaction 2 items
+    { itemID: 4, Transaction: 2, itemName: 'Aluminum Sheet', length: 8.0, price: 35.00 },
+    { itemID: 5, Transaction: 2, itemName: 'Brass Fitting', length: 2.5, price: 22.50 },
+    { itemID: 6, Transaction: 2, itemName: 'Plastic Tubing', length: 25.0, price: 6.00 },
+    { itemID: 7, Transaction: 2, itemName: 'Cable', length: 100.0, price: 8.50 },
+    
+    // Transaction 3 items
+    { itemID: 8, Transaction: 3, itemName: 'Rubber Hose', length: 20.0, price: 18.00 },
+    { itemID: 9, Transaction: 3, itemName: 'Metal Bracket', length: 3.5, price: 45.00 },
+    
+    // Transaction 4 items
+    { itemID: 10, Transaction: 4, itemName: 'Wooden Plank', length: 30.0, price: 28.00 },
+    { itemID: 11, Transaction: 4, itemName: 'Steel Beam', length: 12.0, price: 75.00 },
+    { itemID: 12, Transaction: 4, itemName: 'Concrete Mix', length: 45.0, price: 35.00 },
+    { itemID: 13, Transaction: 4, itemName: 'Rebar', length: 18.5, price: 20.00 },
+    
+    // Transaction 5 items
+    { itemID: 14, Transaction: 5, itemName: 'Paint', length: 5.0, price: 55.00 },
+    { itemID: 15, Transaction: 5, itemName: 'Tiles', length: 12.5, price: 32.00 }
+];
+
 // Simple Supabase client implementation using fetch
 class SimpleSupabaseClient {
     constructor(url, key) {
@@ -129,6 +165,7 @@ let currentTable = null;
 let availableTables = [];
 let transactionsData = [];
 let transactionItemsData = [];
+let useDemoData = false;
 
 // Initialize the application
 async function init() {
@@ -143,7 +180,24 @@ async function init() {
         }
     } catch (error) {
         console.error('Initialization error:', error);
-        showError(`Failed to initialize: ${error.message}`);
+        console.log('Falling back to demo data...');
+        // Fallback to demo data when Supabase fails
+        useDemoData = true;
+        availableTables = ['Transaction'];
+        currentTable = 'Transaction';
+        
+        // Update dropdown
+        tableSelect.innerHTML = '';
+        const option = document.createElement('option');
+        option.value = 'Transaction';
+        option.textContent = 'Transaction (Demo Data)';
+        option.selected = true;
+        tableSelect.appendChild(option);
+        
+        // Load demo data
+        transactionsData = demoTransactions;
+        transactionItemsData = demoTransactionItems;
+        displayData(transactionsData, currentTable);
     }
 }
 
@@ -173,6 +227,14 @@ async function loadAvailableTables() {
 async function loadTableData(tableName) {
     try {
         showLoading();
+        
+        // Use demo data if flag is set
+        if (useDemoData) {
+            transactionsData = demoTransactions;
+            transactionItemsData = demoTransactionItems;
+            displayData(transactionsData, tableName);
+            return;
+        }
         
         const { data, error } = await supabase
             .from(tableName)
@@ -208,7 +270,18 @@ async function loadTableData(tableName) {
         
     } catch (error) {
         console.error('Error loading table data:', error);
-        showError(error.message);
+        // Fallback to demo data on error
+        console.log('Falling back to demo data...');
+        useDemoData = true;
+        transactionsData = demoTransactions;
+        transactionItemsData = demoTransactionItems;
+        
+        // Update dropdown to indicate demo data
+        if (tableSelect.options.length > 0) {
+            tableSelect.options[0].textContent = 'Transaction (Demo Data)';
+        }
+        
+        displayData(transactionsData, tableName);
     }
 }
 
