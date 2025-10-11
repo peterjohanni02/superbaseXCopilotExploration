@@ -151,7 +151,7 @@ async function init() {
 async function loadAvailableTables() {
     try {
         // Try to find tables by attempting to query them
-        const commonTableNames = ['Transactions', 'Transaction Items', 'exampletable1', 'users', 'profiles', 'posts', 'products', 'items', 'data', 'records', 'employees', 'customers', 'orders', 'transactions'];
+        const commonTableNames = ['Transaction', 'Transaction Items', 'exampletable1'];
         const foundTables = [];
         
         for (const tableName of commonTableNames) {
@@ -174,7 +174,7 @@ async function loadAvailableTables() {
             availableTables = foundTables;
         } else {
             // Default to trying a generic table name
-            availableTables = ['Transactions'];
+            availableTables = ['Transaction'];
         }
         
         // Populate the select dropdown
@@ -183,7 +183,7 @@ async function loadAvailableTables() {
             const option = document.createElement('option');
             option.value = table;
             option.textContent = table.charAt(0).toUpperCase() + table.slice(1);
-            if (table === 'Transactions') {
+            if (table === 'Transaction') {
                 option.selected = true;
             }
             tableSelect.appendChild(option);
@@ -192,7 +192,7 @@ async function loadAvailableTables() {
     } catch (error) {
         console.error('Error loading tables:', error);
         // Set a default table
-        availableTables = ['Transactions'];
+        availableTables = ['Transaction'];
         tableSelect.innerHTML = '<option value="Transactions">Transactions</option>';
     }
 }
@@ -217,7 +217,7 @@ async function loadTableData(tableName) {
         }
 
         // If loading Transactions, also load Transaction Items
-        if (tableName === 'Transactions') {
+        if (tableName === 'Transaction') {
             transactionsData = data;
             try {
                 const { data: itemsData, error: itemsError } = await supabase
@@ -249,7 +249,7 @@ function displayData(data, tableName) {
     
     // For Transactions table, only show specific columns
     let columns;
-    if (tableName === 'Transactions') {
+    if (tableName === 'Transaction') {
         columns = ['transDate', 'custName'];
     } else {
         // Get column names from the first row
@@ -272,7 +272,7 @@ function displayData(data, tableName) {
         const tr = document.createElement('tr');
         
         // Make transaction rows clickable
-        if (tableName === 'Transactions') {
+        if (tableName === 'Transaction') {
             tr.style.cursor = 'pointer';
             tr.addEventListener('click', () => openTransactionDetail(row));
             tr.addEventListener('mouseenter', () => {
@@ -450,7 +450,7 @@ async function openTransactionDetail(transaction) {
     if (totalCost > 0) {
         try {
             await supabase
-                .from('Transactions')
+                .from('Transaction')
                 .eq('transactionID', transactionId)
                 .update({ TotalPrice: totalCost });
         } catch (error) {
