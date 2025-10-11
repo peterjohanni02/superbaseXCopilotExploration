@@ -41,7 +41,7 @@ const tableHead = document.getElementById('tableHead');
 const tableBody = document.getElementById('tableBody');
 
 // Current table
-let currentTable = 'products';
+let currentTable = 'transactions';
 
 // Load and display data for selected table
 function loadTableData(tableName) {
@@ -148,5 +148,5 @@ refreshBtn.addEventListener('click', () => {
     }, 500);
 });
 
-// Initialize with products table
-loadTableData('products');
+// Initialize with transactions table
+loadTableData('transactions');

@@ -17,10 +17,7 @@
             <div class="table-selector">
                 <label for="tableSelect">Select Table:</label>
                 <select id="tableSelect">
-                    <option value="users">Users</option>
-                    <option value="products" selected>Products</option>
-                    <option value="orders">Orders</option>
-                    <option value="transactions">Transactions</option>
+                    <option value="transactions" selected>Transactions</option>
                 </select>
             </div>
             <button id="refreshBtn" class="btn btn-primary">
@@ -40,60 +37,60 @@
 
         <div id="dataContainer" class="data-container">
             <div class="table-info">
-                <span id="recordCount" class="record-count">Showing 5 records from "products"</span>
+                <span id="recordCount" class="record-count">Showing 5 records from "transactions"</span>
             </div>
             <div class="table-wrapper">
                 <table id="dataTable">
                     <thead id="tableHead">
                         <tr>
                             <th>Id</th>
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>In Stock</th>
-                            <th>Created At</th>
+                            <th>Order Id</th>
+                            <th>Payment Method</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Transaction Date</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
                         <tr>
-                            <td>1</td>
-                            <td>Laptop Pro 15</td>
-                            <td>Electronics</td>
+                            <td>2001</td>
+                            <td>1001</td>
+                            <td>credit_card</td>
                             <td>$1,299.99</td>
-                            <td>✓</td>
-                            <td>2024-01-15 10:30:00</td>
+                            <td>completed</td>
+                            <td>2024-02-01 10:05:00</td>
                         </tr>
                         <tr>
-                            <td>2</td>
-                            <td>Wireless Mouse</td>
-                            <td>Accessories</td>
-                            <td>$29.99</td>
-                            <td>✓</td>
-                            <td>2024-01-16 14:22:00</td>
+                            <td>2002</td>
+                            <td>1002</td>
+                            <td>paypal</td>
+                            <td>$59.98</td>
+                            <td>completed</td>
+                            <td>2024-02-02 11:35:00</td>
                         </tr>
                         <tr>
-                            <td>3</td>
-                            <td>USB-C Hub</td>
-                            <td>Accessories</td>
-                            <td>$49.99</td>
-                            <td>✓</td>
-                            <td>2024-01-17 09:15:00</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Mechanical Keyboard</td>
-                            <td>Peripherals</td>
-                            <td>$149.99</td>
-                            <td>✗</td>
-                            <td>2024-01-18 16:45:00</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Monitor 27"</td>
-                            <td>Electronics</td>
+                            <td>2003</td>
+                            <td>1003</td>
+                            <td>debit_card</td>
                             <td>$399.99</td>
-                            <td>✓</td>
-                            <td>2024-01-19 11:00:00</td>
+                            <td>completed</td>
+                            <td>2024-02-03 14:20:00</td>
+                        </tr>
+                        <tr>
+                            <td>2004</td>
+                            <td>1004</td>
+                            <td>credit_card</td>
+                            <td>$149.97</td>
+                            <td>pending</td>
+                            <td>2024-02-04 09:50:00</td>
+                        </tr>
+                        <tr>
+                            <td>2005</td>
+                            <td>1005</td>
+                            <td>bank_transfer</td>
+                            <td>$149.99</td>
+                            <td>pending</td>
+                            <td>2024-02-05 16:25:00</td>
                         </tr>
                     </tbody>
                 </table>

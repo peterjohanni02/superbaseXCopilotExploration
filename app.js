@@ -150,44 +150,16 @@ async function init() {
 // Load available tables from Supabase
 async function loadAvailableTables() {
     try {
-        // Try to find tables by attempting to query them
-        const commonTableNames = ['Transactions', 'Transaction Items', 'exampletable1', 'users', 'profiles', 'posts', 'products', 'items', 'data', 'records', 'employees', 'customers', 'orders', 'transactions'];
-        const foundTables = [];
-        
-        for (const tableName of commonTableNames) {
-            try {
-                const { data, error } = await supabase
-                    .from(tableName)
-                    .select('*')
-                    .limit(1);
-                
-                if (!error && data !== null) {
-                    foundTables.push(tableName);
-                }
-            } catch (e) {
-                // Table doesn't exist or no permission
-                continue;
-            }
-        }
-        
-        if (foundTables.length > 0) {
-            availableTables = foundTables;
-        } else {
-            // Default to trying a generic table name
-            availableTables = ['Transactions'];
-        }
+        // Only load Transactions table
+        availableTables = ['Transactions'];
         
         // Populate the select dropdown
         tableSelect.innerHTML = '';
-        availableTables.forEach(table => {
-            const option = document.createElement('option');
-            option.value = table;
-            option.textContent = table.charAt(0).toUpperCase() + table.slice(1);
-            if (table === 'Transactions') {
-                option.selected = true;
-            }
-            tableSelect.appendChild(option);
-        });
+        const option = document.createElement('option');
+        option.value = 'Transactions';
+        option.textContent = 'Transactions';
+        option.selected = true;
+        tableSelect.appendChild(option);
         
     } catch (error) {
         console.error('Error loading tables:', error);
