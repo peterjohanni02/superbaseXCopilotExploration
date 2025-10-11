@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supabase Data Dashboard</title>
+    <title>Transactions Demo - Supabase Data Dashboard</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
             <h1>📊 Supabase Data Dashboard</h1>
-            <p class="subtitle">Professional Data Viewer</p>
+            <p class="subtitle">Transactions Demo with Sample Data</p>
         </header>
 
         <div class="controls">
             <div class="table-selector">
                 <label for="tableSelect">Select Table:</label>
                 <select id="tableSelect">
-                    <option value="">Loading tables...</option>
+                    <option value="Transactions" selected>Transactions</option>
                 </select>
             </div>
             <button id="refreshBtn" class="btn btn-primary">
@@ -25,7 +25,7 @@
             </button>
         </div>
 
-        <div id="loadingState" class="loading-state">
+        <div id="loadingState" class="loading-state" style="display: none;">
             <div class="spinner"></div>
             <p>Loading data...</p>
         </div>
@@ -48,7 +48,7 @@
         </div>
 
         <footer>
-            <p>Connected to Supabase • <span id="connectionStatus">●</span></p>
+            <p>Demo Mode - Click on any transaction row to view details • <span id="connectionStatus">●</span></p>
         </footer>
     </div>
 
@@ -67,7 +67,6 @@
         </div>
     </div>
 
-    <script src="app.js"></script>
-
+    <script src="demo-transactions.js"></script>
 </body>
 </html>
