@@ -151,13 +151,13 @@ async function init() {
 async function loadAvailableTables() {
     try {
         // Only load Transactions table
-        availableTables = ['Transactions'];
+        availableTables = ['Transaction'];
         
         // Populate the select dropdown
         tableSelect.innerHTML = '';
         const option = document.createElement('option');
-        option.value = 'Transactions';
-        option.textContent = 'Transactions';
+        option.value = 'Transaction';
+        option.textContent = 'Transaction';
         option.selected = true;
         tableSelect.appendChild(option);
         
