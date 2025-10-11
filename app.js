@@ -164,7 +164,7 @@ async function loadAvailableTables() {
     } catch (error) {
         console.error('Error loading tables:', error);
         // Set a default table
-        availableTables = ['Transactions'];
+        availableTables = ['Transaction'];
         tableSelect.innerHTML = '<option value="Transactions">Transactions</option>';
     }
 }
@@ -189,7 +189,7 @@ async function loadTableData(tableName) {
         }
 
         // If loading Transactions, also load Transaction Items
-        if (tableName === 'Transactions') {
+        if (tableName === 'Transaction') {
             transactionsData = data;
             try {
                 const { data: itemsData, error: itemsError } = await supabase
@@ -221,7 +221,7 @@ function displayData(data, tableName) {
     
     // For Transactions table, only show specific columns
     let columns;
-    if (tableName === 'Transactions') {
+    if (tableName === 'Transaction') {
         columns = ['transDate', 'custName'];
     } else {
         // Get column names from the first row
@@ -244,7 +244,7 @@ function displayData(data, tableName) {
         const tr = document.createElement('tr');
         
         // Make transaction rows clickable
-        if (tableName === 'Transactions') {
+        if (tableName === 'Transaction') {
             tr.style.cursor = 'pointer';
             tr.addEventListener('click', () => openTransactionDetail(row));
             tr.addEventListener('mouseenter', () => {
@@ -422,7 +422,7 @@ async function openTransactionDetail(transaction) {
     if (totalCost > 0) {
         try {
             await supabase
-                .from('Transactions')
+                .from('Transaction')
                 .eq('transactionID', transactionId)
                 .update({ TotalPrice: totalCost });
         } catch (error) {
